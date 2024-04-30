@@ -1,0 +1,5 @@
+{
+    "java.jdt.ls.java.home": "/opt/java/openjdk",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic",
+}

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  java-app:
+    container_name: java-app-container_name
+    build:
+      context: ./java
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - "..:/myapp:cached"
+    depends_on:
+      - postgresql
+    networks:
+      - todo-network
+    tty: true
+  postgresql:
+    container_name: postgresql-container
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: todo_db
+    ports:
+      - "5432:5432"
+    networks:
+      - todo-network
+    volumes:
+      - type: volume
+        source: todo-db-volume
+        target: /var/libpostgresql/data
+
+networks:
+  todo-network:
+
+volumes:
+  todo-db-volume:
+    driver: local

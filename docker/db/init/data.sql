@@ -1,0 +1,5 @@
+BEGIN;
+
+INSERT INTO users VALUES ("Taro");
+
+COMMIT;
