@@ -32,6 +32,9 @@ services:
       - type: volume
         source: todo-db-volume
         target: /var/libpostgresql/data
+      - type: bind
+        source: ./db/init
+        target: /docker-entrypoint-initdb.d
 
 networks:
   todo-network:
