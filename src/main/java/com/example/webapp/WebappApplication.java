@@ -12,7 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WebappApplication {
     public static void main(String[] args) {
-        SpringApplication.run(WebappApplication.class, args).getBean(WebappApplication.class).exe();
+        // SpringApplication.run(WebappApplication.class, args).getBean(WebappApplication.class).exe();
+        SpringApplication.run(WebappApplication.class, args);
     }
 
     /** DI */
