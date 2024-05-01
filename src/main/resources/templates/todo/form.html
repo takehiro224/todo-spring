@@ -17,12 +17,16 @@
                 <th>ToDo</th>
                 <td>
                     <input type="text" th:field="*{todo}">
+                    <!-- ToDo用: バリデーションエラー表示 -->
+                    <span th:if="${#fields.hasErrors('todo')}" th:errors="*{todo}" style="color: red;"></span>
                 </td>
             </tr>
             <tr>
                 <th>詳細</th>
                 <td>
                     <textarea cols="30" rows="5" th:field="*{detail}"></textarea>
+                    <!-- 詳細用: バリデーションエラー表示 -->
+                    <span th:if="${#fields.hasErrors('detail')}" th:errors="*{detail}" style="color: red;"></span>
                 </td>
             </tr>
         </table>

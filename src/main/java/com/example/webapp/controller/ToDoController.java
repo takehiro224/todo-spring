@@ -4,6 +4,8 @@ import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,7 +59,12 @@ public class ToDoController {
 
     /** 新規登録処理実行 */
     @PostMapping("/save")
-    public String create(ToDoForm form, RedirectAttributes attributes) {
+    public String create(@Validated ToDoForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+        // バリデーションチェック
+        if (bindingResult.hasErrors()) {
+            form.setIsNew(true);
+            return "todo/form";
+        }
         // フォームをエンティティに変換
         ToDo todo = ToDoHelper.convertToDo(form);
         // 登録実行
@@ -85,7 +92,12 @@ public class ToDoController {
 
     /** 更新処理実行 */
     @PostMapping("/update")
-    public String update(ToDoForm form, RedirectAttributes attributes) {
+    public String update(@Validated ToDoForm form, BindingResult bindingResult, RedirectAttributes attributes) {
+        // バリデーションチェック
+        if (bindingResult.hasErrors()) {
+            form.setIsNew(false);
+            return "todo/form";
+        }
         // フォームをエンティティに変換
         ToDo todo = ToDoHelper.convertToDo(form);
         // 更新処理
